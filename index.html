@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>VBEATS — Photo & Video Editor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">VBEATS</div>
+    <nav>
+      <button id="tab-photo" class="tab active">Photo Editor</button>
+      <button id="tab-video" class="tab">Video Editor</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- PHOTO EDITOR -->
+    <section id="photo-editor" class="panel">
+      <h2>Photo Editor</h2>
+      <div class="controls-row">
+        <input id="photo-file" type="file" accept="image/*" />
+        <button id="photo-reset" class="btn">Reset</button>
+        <button id="photo-download" class="btn primary">Download</button>
+      </div>
+
+      <div class="editor-grid">
+        <div class="canvas-wrap">
+          <canvas id="photo-canvas" class="canvas"></canvas>
+        </div>
+
+        <div class="sidebar">
+          <label>Brightness <input id="brightness" type="range" min="0" max="200" value="100" /></label>
+          <label>Contrast <input id="contrast" type="range" min="0" max="200" value="100" /></label>
+          <label>Grayscale <input id="grayscale" type="range" min="0" max="100" value="0" /></label>
+          <label>Invert <input id="invert" type="range" min="0" max="100" value="0" /></label>
+          <hr />
+          <label>Add Text</label>
+          <input id="text-input" placeholder="Enter text" />
+          <label>Font Size <input id="font-size" type="number" value="48" /></label>
+          <label>Color <input id="text-color" type="color" value="#ffffff" /></label>
+          <button id="add-text" class="btn">Add Text Layer</button>
+          <button id="clear-text" class="btn">Clear Text Layers</button>
+          <hr />
+          <button id="apply-fit" class="btn">Fit Image to Canvas</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO EDITOR -->
+    <section id="video-editor" class="panel hidden">
+      <h2>Video Editor</h2>
+
+      <div class="controls-row">
+        <input id="video-file" type="file" accept="video/*" />
+        <button id="load-ffmpeg" class="btn">Load Engine</button>
+        <button id="trim-video" class="btn primary">Trim & Export</button>
+        <span id="ffmpeg-status" class="muted">FFmpeg: not loaded</span>
+      </div>
+
+      <div class="video-area">
+        <video id="player" controls class="video-player"></video>
+
+        <div class="trim-controls">
+          <label>Start (s) <input id="start-sec" type="number" value="0" min="0" /></label>
+          <label>End (s) <input id="end-sec" type="number" value="5" min="0" /></label>
+          <progress id="ffmpeg-progress" value="0" max="100" class="progress hidden"></progress>
+          <a id="download-video" class="btn primary hidden">Download Trimmed</a>
+          <p id="video-msg" class="muted"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>VBEATS • In-browser editors — Photo + Video • © 2025</small>
+  </footer>
+
+  <!-- Libraries -->
+  <!-- ffmpeg.wasm UMD via unpkg -->
+  <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.0/dist/ffmpeg.min.js"></script>
+
+  <!-- App scripts -->
+  <script src="app.js"></script>
+  <script src="video.js"></script>
+</body>
+</html>
